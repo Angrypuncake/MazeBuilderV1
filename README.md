@@ -1,5 +1,5 @@
 # MazeBuilderV1
-A mazebuilder algo because too lazy to hardcode maze
+A mazebuilder algo because too lazy to make maze myself
 
 #Code written by Elvis Nguyen with assistance from chatGPT 4
 #Despite being a relatively simple GUI, this is the first time I've developed a functional GUI so ChatGPT was a massive help in guiding me through using tkinter
