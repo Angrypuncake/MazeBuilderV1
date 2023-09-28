@@ -1,7 +1,6 @@
 # MazeBuilderV1
 A mazebuilder algo because too lazy to make maze myself
 
-#Code written by Elvis Nguyen with assistance from chatGPT 4
 #Despite being a relatively simple GUI, this is the first time I've developed a functional GUI so ChatGPT was a massive help in guiding me through using tkinter
 #The code is not perfect, it is just a basic tool for you to creatively explore maze building because its a massive hassle to hardcode massive/complex mazes
 
@@ -51,3 +50,5 @@ Blocks are hard to match up or align
 - Adjust the snap scale to 5, 10 or 15
 
 """
+
+#Code written by Elvis Nguyen with assistance from chatGPT 4
