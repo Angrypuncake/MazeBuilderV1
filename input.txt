@@ -12,7 +12,7 @@ insertAndSetFirstWall(&head, 10, 15, 275, 10, 200);
 insertAndSetFirstWall(&head, 11, 15, 75, 10, 200);
 insertAndSetFirstWall(&head, 12, 625, 175, 10, 200);
 insertAndSetFirstWall(&head, 13, 20, 305, 200, 10);
-insertAndSetFirstWall(&head, 14, 85, 310, 20, 100);
+insertAndSetFirstWall(&head, 14, 85, 310, 10, 100);
 insertAndSetFirstWall(&head, 15, 355, 175, 10, 200);
 insertAndSetFirstWall(&head, 16, 285, 305, 80, 10);
 insertAndSetFirstWall(&head, 17, 210, 215, 10, 100);
