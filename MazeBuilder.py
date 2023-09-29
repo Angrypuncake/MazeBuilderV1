@@ -3,7 +3,7 @@ import math
 from tkinter import filedialog
 
 # optional for copy code to clipboard
-import pyperclip
+#import pyperclip
 
 wall_list = []
 
