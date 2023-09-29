@@ -2,6 +2,9 @@ import tkinter as tk
 import math
 from tkinter import filedialog
 
+# optional for copy code to clipboard
+import pyperclip
+
 wall_list = []
 
 def rotate_point(x, y, angle, origin_x, origin_y):
@@ -160,7 +163,10 @@ def set_canvas_size():
         canvas_height = 500  # Default value
 
     canvas.config(width=canvas_width, height=canvas_height)
-    
+
+# Set the canvas size originally to 640, 480
+set_canvas_size()
+
 set_canvas_size_button = tk.Button(root, text="Set Canvas Size", command=set_canvas_size)
 set_canvas_size_button.pack()
 
@@ -191,11 +197,37 @@ def delete_instance():
                 update_listbox()  # Update the listbox to reflect the changes
         else:
             print("Index out of range: ", index)  # Debugging line
+
+def delete_last_instance(event):
+    # Basic code for Ctrl + Z functioning based on above code
+    global instance_counter
+    # Check if there are any instances to delete
+    if canvas_ids: 
+        # Get the index of the last instance
+        index = len(canvas_ids) - 1
+        # Get the last instance
+        canvas_id = canvas_ids[index]
+        # Copy paste of the above code
+        wall_data = canvas_to_wall_mapping.get(canvas_id)
+        if wall_data:
+            canvas.delete(canvas_id)
+            del canvas_ids[index]  # Remove the canvas ID from the list
+            del wall_list[index]
+            del canvas_to_wall_mapping[canvas_id]
+
+            # Update the instance IDs in the listbox after deletion
+            instance_listbox.delete(index)
+            instance_counter -= 1
+            update_listbox()  # Update the listbox to reflect the changes
+
+root.bind('<Control-z>', delete_last_instance)
+
 def update_listbox():
-    items = instance_listbox.get(0, tk.END)
     instance_listbox.delete(0, tk.END)
-    for i, item in enumerate(items):
-        instance_listbox.insert(tk.END, f"Instance {i}")
+    for i, wall_data in enumerate(wall_list):
+        instance_info = f"Instance {i}: X={wall_data['x']}, Y={wall_data['y']}, Width={wall_data['width']}, Height={wall_data['height']}, Angle={wall_data['angle']}"
+        instance_listbox.insert(tk.END, instance_info)
+
 
 delete_button = tk.Button(root, text="Delete Selected", command=delete_instance)
 delete_button.pack()
@@ -374,5 +406,16 @@ instance_listbox.bind('<<ListboxSelect>>', highlight_instance)
 upload_button = tk.Button(root, text="Upload Wall Data", command=upload_and_generate_walls)
 upload_button.pack()
 
+# Copy code to clipboard
+def copy_file_to_clipboard(event=None):
+    generate_code()
+    with open('wall_code.txt', 'r') as file:
+        text = file.read()
+    pyperclip.copy(text)
+    pyperclip.paste()
+
+button = tk.Button(root, text="Copy to Clipboard", command=copy_file_to_clipboard)
+button.pack()
+root.bind('<Control-c>', copy_file_to_clipboard)
 
 root.mainloop()
