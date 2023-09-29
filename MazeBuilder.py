@@ -69,7 +69,7 @@ def generate_code():
 root = tk.Tk()
 root.title("Wall Placement GUI")
 angle_var = tk.IntVar()
-snap_scale_var = tk.IntVar(value=10)  # Default value is 10
+snap_scale_var = tk.IntVar(value=10)  # Default value is 50
 instance_counter = 0
 canvas_to_wall_mapping = {}
 
@@ -95,16 +95,16 @@ canvas.bind("<Motion>", on_move)
 width_var = tk.IntVar(value=50)
 height_var = tk.IntVar(value=50)
 
-width_scale = tk.Scale(root, from_=1, to=200, orient="horizontal", label="Width", variable=width_var)
+width_scale = tk.Scale(root, from_=1, to=500, orient="horizontal", label="Width", variable=width_var)
 width_scale.pack()
 
-width_spinbox = tk.Spinbox(root, from_=1, to=200, textvariable=width_var)
+width_spinbox = tk.Spinbox(root, from_=1, to=500, textvariable=width_var)
 width_spinbox.pack()
 
-height_scale = tk.Scale(root, from_=1, to=200, orient="horizontal", label="Height", variable=height_var)
+height_scale = tk.Scale(root, from_=1, to=500, orient="horizontal", label="Height", variable=height_var)
 height_scale.pack()
 
-height_spinbox = tk.Spinbox(root, from_=1, to=200, textvariable=height_var)
+height_spinbox = tk.Spinbox(root, from_=1, to=500, textvariable=height_var)
 height_spinbox.pack()
 
 #rotation_scale = tk.Scale(root, from_=0, to=360, orient="horizontal", label="Rotation", variable=angle_var)
@@ -187,10 +187,10 @@ def delete_instance():
             wall_data = canvas_to_wall_mapping.get(canvas_id)
             if wall_data:
                 canvas.delete(canvas_id)
-                del canvas_ids[index]  # Remove the canvas ID from the list
-                del wall_list[index]
+                canvas_ids.pop(index)  # Remove the canvas ID from the list
+                wall_list.pop(index)  # Remove the wall data
                 del canvas_to_wall_mapping[canvas_id]
-                
+
                 # Update the instance IDs in the listbox after deletion
                 instance_listbox.delete(index)
                 instance_counter -= 1
@@ -225,7 +225,7 @@ root.bind('<Control-z>', delete_last_instance)
 def update_listbox():
     instance_listbox.delete(0, tk.END)
     for i, wall_data in enumerate(wall_list):
-        instance_info = f"Instance {i}: X={wall_data['x']}, Y={wall_data['y']}, Width={wall_data['width']}, Height={wall_data['height']}, Angle={wall_data['angle']}"
+        instance_info = f"Instance {i}: X={wall_data['x']}, Y={wall_data['y']}, Width={wall_data['width']}, Height={wall_data['height']}"
         instance_listbox.insert(tk.END, instance_info)
 
 
@@ -268,7 +268,6 @@ def on_click_and_add_instance(event):
         'y': y,
         'width': width,
         'height': height,
-        'angle': angle
     }
     wall_list.append(wall_data)
 
@@ -277,7 +276,7 @@ def on_click_and_add_instance(event):
     canvas_to_wall_mapping[rect] = wall_data
     
     # Update the listbox with instance information
-    instance_info = f"Instance {instance_id}: X={x}, Y={y}, Width={width}, Height={height}, Angle={angle}"
+    instance_info = f"Instance {instance_id}: X={x}, Y={y}, Width={width}, Height={height}"
     instance_listbox.insert(tk.END, instance_info)  # Insert the instance information as a new item
     instance_counter += 1
     
@@ -384,7 +383,6 @@ def on_canvas_click(event):
         'y': y,
         'width': width,
         'height': height,
-        'angle': angle
     }
     wall_list.append(wall_data)
 
@@ -392,13 +390,14 @@ def on_canvas_click(event):
     canvas_to_wall_mapping[rect] = wall_data
     
     # Update the listbox with instance information
-    instance_info = f"Instance {instance_id}: X={x}, Y={y}, Width={width}, Height={height}, Angle={angle}"
+    instance_info = f"Instance {instance_id}: X={x}, Y={y}, Width={width}, Height={height}"
     instance_listbox.insert(tk.END, instance_info)  # Insert the instance information as a new item
     instance_counter += 1
 
     # Highlight the selected instance
     canvas.itemconfig(rect, outline="red", width=2)  # Highlight with a red outline
     canvas.update()
+    
 
 
 canvas.bind("<Button-1>", on_canvas_click)
