@@ -323,6 +323,7 @@ def upload_and_generate_walls():
         create_instances_from_file(file_path)
 
 def create_instances_from_file(file_path):
+    global instance_counter
     with open(file_path, "r") as file:
         for line in file:
             wall_data = parse_wall_data(line)
@@ -341,7 +342,8 @@ def create_instances_from_file(file_path):
                 # Update the listbox with instance information
                 instance_info = f"Instance {index}: X={x}, Y={y}, Width={width}, Height={height}"
                 instance_listbox.insert(tk.END, instance_info)  # Insert the instance information as a new item
-
+                # Update instance_counter based on the index of loaded instances
+                instance_counter = max(instance_counter, index + 1)
 
     
 def delete_all_instances():
@@ -376,7 +378,7 @@ def on_canvas_click(event):
     canvas_ids.append(rect)  # Append the canvas ID for the new instance
     print(f"Added canvas ID {rect} to canvas_ids")
 
-    instance_id = instance_counter  # Start instance_id at 0
+    instance_id = instance_counter  # Start instance_id at the current instance_counter value
     
     wall_data = {
         'x': x,
@@ -392,7 +394,8 @@ def on_canvas_click(event):
     # Update the listbox with instance information
     instance_info = f"Instance {instance_id}: X={x}, Y={y}, Width={width}, Height={height}"
     instance_listbox.insert(tk.END, instance_info)  # Insert the instance information as a new item
-    instance_counter += 1
+    
+    instance_counter += 1  # Increment instance_counter for the next instance
 
     # Highlight the selected instance
     canvas.itemconfig(rect, outline="red", width=2)  # Highlight with a red outline
