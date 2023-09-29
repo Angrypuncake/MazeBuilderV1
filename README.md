@@ -5,11 +5,6 @@ A mazebuilder algo because too lazy to make maze myself
 #The code is not perfect, it is just a basic tool for you to creatively explore maze building because its a massive hassle to hardcode massive/complex mazes
 
 """
-- MUST SET CANVAS SIZE BEFORE DOING ANYTHING
-- Keep it minimised, the GUI screen doesnt register clicks well when it is in fullscreen or near the edge of the desktop
-"""
-
-"""
 HOW TO USE
 - Make sure python version is fully updated
 - Run the WallGui.py program using any IDE like VSCODE
@@ -26,7 +21,7 @@ insertAndSetFirstWall(&head, 1, 535, 465, 100, 10);
 SELECTING & DELETING
 - To select a wall for deletion, click on the instance on the right instances list
 - Then click delete selected 
-- To clear the screen, press delete all instances. THIS CANNOT BE UNDONE/ ctrl Z does not work in this program. 
+- To clear the screen, press delete all instances.
 - If you want to upload your own walls to the editor, use the UPLOAD DATA BUTTON. This takes a txt file containing examples like:
 
 insertAndSetFirstWall(&head, 0, 625, 375, 10, 100);
@@ -39,7 +34,7 @@ Uploaded maze is not fitting
 - Make sure to set your canvas width and height first 
 
 Blocks arent being placed down 
-- Make sure the gui is not in FULLSCREEN is centred on your screen. 
+- Try keeping the GUI windowed and not FULLSCREEN. 
 
 Uploaded file is not being read; 
 the txt file must be in the exact format as the output file. Containing only lines of 
