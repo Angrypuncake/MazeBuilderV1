@@ -15,7 +15,8 @@ HOW TO USE
 
 The contents of the txt file will kinda look like 
 
-insertAndSetFirstWall(&head, 0, 625, 375, 10, 100); 
+insertAndSetFirstWall(&head, 0, 625, 375, 10, 100);
+
 insertAndSetFirstWall(&head, 1, 535, 465, 100, 10);
 
 SELECTING & DELETING
