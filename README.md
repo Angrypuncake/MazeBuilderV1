@@ -13,9 +13,8 @@ HOW TO USE
 - Click GENERATE CODE to generate a txt file "wall_code.txt" of code you can copy and paste into your main.c
 - The txt file will be in the directory next to the WallGUI.py file
 
-the contents of the txt file will kinda look like 
+The contents of the txt file will kinda look like 
 -insertAndSetFirstWall(&head, 0, 625, 375, 10, 100);
-
 -insertAndSetFirstWall(&head, 1, 535, 465, 100, 10);
 
 SELECTING & DELETING
