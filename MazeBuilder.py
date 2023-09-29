@@ -2,6 +2,9 @@ import tkinter as tk
 import math
 from tkinter import filedialog
 
+# optional for copy code to clipboard
+import pyperclip
+
 wall_list = []
 
 def rotate_point(x, y, angle, origin_x, origin_y):
@@ -160,7 +163,10 @@ def set_canvas_size():
         canvas_height = 500  # Default value
 
     canvas.config(width=canvas_width, height=canvas_height)
-    
+
+# Set the canvas size originally to 640, 480
+set_canvas_size()
+
 set_canvas_size_button = tk.Button(root, text="Set Canvas Size", command=set_canvas_size)
 set_canvas_size_button.pack()
 
@@ -400,5 +406,16 @@ instance_listbox.bind('<<ListboxSelect>>', highlight_instance)
 upload_button = tk.Button(root, text="Upload Wall Data", command=upload_and_generate_walls)
 upload_button.pack()
 
+# Copy code to clipboard
+def copy_file_to_clipboard(event=None):
+    generate_code()
+    with open('wall_code.txt', 'r') as file:
+        text = file.read()
+    pyperclip.copy(text)
+    pyperclip.paste()
+
+button = tk.Button(root, text="Copy to Clipboard", command=copy_file_to_clipboard)
+button.pack()
+root.bind('<Control-c>', copy_file_to_clipboard)
 
 root.mainloop()
