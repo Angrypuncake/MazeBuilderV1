@@ -43,8 +43,10 @@ Blocks arent being placed down
 - Try keeping the GUI windowed and not FULLSCREEN. 
 
 Uploaded file is not being read; 
-- the txt file must be in the exact format as the output file. Containing only lines of 
+- the txt file must be in the exact format as the output file. Containing only lines of
+- 
 insertAndSetFirstWall(&head, 0, 625, 375, 10, 100);
+
 insertAndSetFirstWall(&head, 1, 535, 465, 100, 10);
 
 Blocks are hard to match up or align
