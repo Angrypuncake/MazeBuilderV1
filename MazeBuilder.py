@@ -69,7 +69,7 @@ def generate_code():
 root = tk.Tk()
 root.title("Wall Placement GUI")
 angle_var = tk.IntVar()
-snap_scale_var = tk.IntVar(value=10)  # Default value is 50
+snap_scale_var = tk.IntVar(value=10)  # Default value is 10
 instance_counter = 0
 canvas_to_wall_mapping = {}
 
