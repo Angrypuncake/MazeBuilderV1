@@ -95,6 +95,57 @@ canvas.bind("<Motion>", on_move)
 width_var = tk.IntVar(value=50)
 height_var = tk.IntVar(value=50)
 
+
+# CHECKBOX FOR MAZE_MIDDLE FUNCTION
+list_for_checkbox_lines = []
+def show_maze_middle_checkbox_function():
+    # get the current canvas width and height
+    canvas_width = canvas.winfo_width()
+    canvas_height = canvas.winfo_height()
+
+    # calculate the middle points of the canvas
+    mid_x = canvas_width / 2
+    mid_y = canvas_height / 2
+
+    # get the current value of the checkbox
+    value = checkbox_var.get()
+
+    # if the value is "Checked":
+    #           create two thin black polygons in the 
+    #           middle of the canvas using create_polygon method
+    # Else:
+    #           delete lines
+    if value == "Checked":
+        # size of line is 1
+        horizontal_id = canvas.create_polygon(
+            0, mid_y - 0.5,
+            0, mid_y + 0.5,
+            canvas_width, mid_y + 0.5,
+            canvas_width, mid_y - 0.5,
+            fill="black",
+        )
+        vertical_id = canvas.create_polygon(
+            mid_x - 0.5, 0,
+            mid_x + 0.5, 0,
+            mid_x + 0.5, canvas_height,
+            mid_x - 0.5, canvas_height,
+            fill="black",
+        )
+        list_for_checkbox_lines.append(horizontal_id)
+        list_for_checkbox_lines.append(vertical_id)
+    else:
+        # delete lines
+        for line in list_for_checkbox_lines:
+            canvas.delete(line)
+checkbox_var = tk.StringVar()
+show_maze_middle_checkbox = tk.Checkbutton(
+    root, 
+    text="Show Maze Middle",
+    command=show_maze_middle_checkbox_function,
+    variable=checkbox_var, onvalue="Checked", offvalue="Unchecked")
+show_maze_middle_checkbox.pack()
+
+
 width_scale = tk.Scale(root, from_=1, to=500, orient="horizontal", label="Width", variable=width_var)
 width_scale.pack()
 
