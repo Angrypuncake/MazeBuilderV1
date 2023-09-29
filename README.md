@@ -52,3 +52,7 @@ Blocks are hard to match up or align
 """
 
 #Code written by Elvis Nguyen with assistance from chatGPT 4
+
+## Contributors
+[Mudit-B](https://github.com/Mudit-B) - Provided Added Ctrl + Z, Clipboard functionality and fixed various issues
+
