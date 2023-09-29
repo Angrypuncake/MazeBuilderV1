@@ -29,7 +29,9 @@ UPLOADING
 - If you want to upload your own walls to the editor, use the UPLOAD DATA BUTTON. This takes a txt file containing examples like:
 
 insertAndSetFirstWall(&head, 0, 625, 375, 10, 100);
+
 insertAndSetFirstWall(&head, 1, 535, 465, 100, 10);
+
 insertAndSetFirstWall(&head, 2, 445, 465, 100, 10);
 
 TROUBLESHOOTING
