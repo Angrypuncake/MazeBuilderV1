@@ -18,9 +18,12 @@ insertAndSetFirstWall(&head, 0, 625, 375, 10, 100);
 insertAndSetFirstWall(&head, 1, 535, 465, 100, 10);
 
 SELECTING & DELETING
-- To select a wall for deletion, click on the instance on the right instances list
-- Then click delete selected 
-- To clear the screen, press delete all instances.
+- Select any of the instances listed on the right. It'll highlight the corresponding wall on the screen so you know what walls you are about to delete. 
+- After selecting an instance and the corresponding wall is highlighted, click the 'Delete selected' button.
+
+- The code also supports Ctrl + Z undo for misplaced blocks. 
+
+UPLOADING
 - If you want to upload your own walls to the editor, use the UPLOAD DATA BUTTON. This takes a txt file containing examples like:
 
 insertAndSetFirstWall(&head, 0, 625, 375, 10, 100);
