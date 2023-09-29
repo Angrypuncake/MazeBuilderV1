@@ -1,10 +1,9 @@
-# MazeBuilderV1
+MazeBuilderV1
 A mazebuilder algo because too lazy to make maze myself
 
-#Despite being a relatively simple GUI, this is the first time I've developed a functional GUI so ChatGPT was a massive help in guiding me through using tkinter
-#The code is not perfect, it is just a basic tool for you to creatively explore maze building because its a massive hassle to hardcode massive/complex mazes
+Despite being a relatively simple GUI, this is the first time I've developed a functional GUI so ChatGPT was a massive help in guiding me through using tkinter
+The code is not perfect, it is just a basic tool for you to creatively explore maze building because its a massive hassle to hardcode massive/complex mazes
 
-"""
 HOW TO USE
 - Make sure python version is fully updated
 - Run the WallGui.py program using any IDE like VSCODE
@@ -12,7 +11,7 @@ HOW TO USE
 - Click on the screen to place a wall
 - Customise the wall using the width and height sliders
 - Click GENERATE CODE to generate a txt file "wall_code.txt" of code you can copy and paste into your main.c
--The txt file will be in the directory next to the WallGUI.py file
+- The txt file will be in the directory next to the WallGUI.py file
 
 the contents of the txt file will kinda look like 
 insertAndSetFirstWall(&head, 0, 625, 375, 10, 100);
@@ -44,7 +43,6 @@ insertAndSetFirstWall(&head, 1, 535, 465, 100, 10);
 Blocks are hard to match up or align
 - Adjust the snap scale to 5, 10 or 15
 
-"""
 
 #Code written by Elvis Nguyen with assistance from chatGPT 4
 
