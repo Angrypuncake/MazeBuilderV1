@@ -22,7 +22,7 @@ insertAndSetFirstWall(&head, 1, 535, 465, 100, 10);
 - After selecting an instance and the corresponding wall is highlighted, click the 'Delete selected' button.
 
 ### Rotating
-- The block that you are currently holding can be rotated with `r`. This will swap its width and height. Usefull for quickly building walls.
+- The block that you are currently holding can be rotated with `r`. This will swap its width and height. Useful for quickly building walls.
 
 ### Undo 
 - Ctrl + Z will undo the last action, if it was to delete a block, it will restore the deleted block. If it was to place a block, it will then delete the block.
