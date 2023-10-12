@@ -23,7 +23,7 @@ SELECTING & DELETING
 - Select any of the instances listed on the right. It'll highlight the corresponding wall on the screen so you know what walls you are about to delete. 
 - After selecting an instance and the corresponding wall is highlighted, click the 'Delete selected' button.
 
-- The code also supports Ctrl + Z undo for misplaced blocks. 
+- Ctrl + Z will undo the last action, if it was to delete a block, it will restore the deleted block. If it was to place a block, it will then delete the block.
 
 UPLOADING
 - If you want to upload your own walls to the editor, use the UPLOAD DATA BUTTON. This takes a txt file containing examples like:
