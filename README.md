@@ -17,16 +17,19 @@ insertAndSetFirstWall(&head, 1, 535, 465, 100, 10);
 // and so on...
 ```
 
-### SELECTING & DELETING
+### Selecting & Deleting
 - Select any of the instances listed on the right. It'll highlight the corresponding wall on the screen so you know what walls you are about to delete. 
 - After selecting an instance and the corresponding wall is highlighted, click the 'Delete selected' button.
 
-### UNDO 
+### Rotating
+- The block that you are currently holding can be rotated with `r`. This will swap its width and height. Usefull for quickly building walls.
+
+### Undo 
 - Ctrl + Z will undo the last action, if it was to delete a block, it will restore the deleted block. If it was to place a block, it will then delete the block.
 - Re-doing (using Ctrl + y) will be added soon.
 
-### UPLOADING
-- If you want to upload your own walls to the editor, use the UPLOAD DATA BUTTON. This takes a txt file containing examples like:
+### Loading
+- If you want to load your own walls to the editor, use the UPLOAD DATA BUTTON. This takes a txt file containing examples like:
 ```C
 insertAndSetFirstWall(&head, 0, 625, 375, 10, 100);
 insertAndSetFirstWall(&head, 1, 535, 465, 100, 10);
