@@ -58,7 +58,7 @@ insertAndSetFirstWall(&head, 1, 535, 465, 100, 10);
 Original code written by Elvis Nguyen with assistance from chatGPT 4
 
 
-Modified by Isa
+[Mlemko](https://github.com/mlemko) - Added undo, redo and rotation functionality.
 
 
 [Mudit-B](https://github.com/Mudit-B) - Provided Added Ctrl + Z, Clipboard functionality and fixed various issues
