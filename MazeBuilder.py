@@ -234,9 +234,10 @@ generate_button.pack()
 snap_scale = tk.Scale(root, from_=1, to=100, orient="horizontal", label="Snap Scale", variable=snap_scale_var)
 snap_scale.pack()
 
+redeleted_zone = [] # deleted walls specifically done by the "undo" function.
 deleted_zone = [] # past deleted walls, used to restore when deleted (Stored as tuple of canvas_id and wall data)
 commands_list: list[Commands] = [] # past commands, used when doing Ctrl+Z
-undoed_commands: list[Commands] = [] # commands that have been undone, used when doing Ctrl+Y
+undoed_commands: list[Commands] = [] # commands that have been undone, used when doing Ctrl+Y. Emptied if any new commands are executed.
 
 canvas_ids = []
 def delete_instance():
@@ -258,6 +259,8 @@ def delete_instance():
                 instance_listbox.delete(index)
                 instance_counter -= 1
                 commands_list.append(Commands.DELETE)
+                undoed_commands.clear()
+                redeleted_zone.clear()
                 update_listbox()  # Update the listbox to reflect the changes
         else:
             print("Index out of range: ", index)  # Debugging line
@@ -276,9 +279,9 @@ def undo_last_command(event):
             # Copy paste of the above code
             wall_data = canvas_to_wall_mapping.get(canvas_id)
             if wall_data:
-                # Store the block in the deleted zone for restoration if needed.
+                # Store the block in the redeleted zone for restoration if needed.
                 undoed_commands.append(last_command)
-                deleted_zone.append(wall_data)
+                redeleted_zone.append(wall_data)
                 
                 canvas.delete(canvas_id)
                 del canvas_ids[-1]  # Remove the canvas ID from the list
@@ -321,10 +324,61 @@ def undo_last_command(event):
                 print(f"Re-added canvas ID {rect} to canvas_ids")
             undoed_commands.append(last_command)
             update_listbox() # update the listbox to reflect the change.
-                
-            
 
 root.bind('<Control-z>', undo_last_command)
+
+def redo_last_command(event):
+    global instance_counter
+    global commands_list
+    # Checks if there are any commands that can be redone.
+    if undoed_commands:
+        last_command = undoed_commands.pop(-1)
+        if (last_command == Commands.PLACE and redeleted_zone): # Checks if any walls have been undone.
+            deleted_wall = redeleted_zone.pop(-1) # Grab the last undone wall.
+            # Add it back into the canvas
+            angle = angle_var.get()
+            flat_corners = calculate_rotated_corners(deleted_wall['x'], deleted_wall['y'], deleted_wall['width'], deleted_wall['height'], angle)
+            rect = canvas.create_polygon(*flat_corners, fill="blue", tags="draggable")
+            
+            canvas_ids.append(rect)
+            wall_list.append(deleted_wall)
+            canvas_to_wall_mapping[rect] = deleted_wall
+            instance_data = f"Instance {instance_counter}: X={deleted_wall['x']}, Y={deleted_wall['y']}, Width={deleted_wall['width']}, Height={deleted_wall['height']}"
+            instance_listbox.insert(tk.END, instance_data)
+            instance_counter += 1
+            print(f"Re-added canvas ID {rect} to canvas_ids")
+            commands_list.append(last_command)
+            update_listbox() # Update the listbox to reflect the changes.
+        elif(last_command == Commands.DELETE and canvas_ids): # Checks if there are any walls existing to delete again.
+            canvas_id = canvas_ids[-1] # Grab the last block.
+            # Copy paste of the above code
+            wall_data = canvas_to_wall_mapping.get(canvas_id)
+            if wall_data:
+                # Store the block in the deleted zone for restoration if needed.
+                commands_list.append(last_command)
+                deleted_zone.append(wall_data)
+                
+                canvas.delete(canvas_id)
+                del canvas_ids[-1]  # Remove the canvas ID from the list
+                del wall_list[-1]
+                del canvas_to_wall_mapping[canvas_id]
+
+                # Update the instance IDs in the listbox after deletion
+                instance_listbox.delete(-1)
+                instance_counter -= 1
+                update_listbox()  # Update the listbox to reflect the changes
+        elif(last_command == Commands.DELETE_ALL and canvas_ids): # Checks for any walls to delete again.
+            instance_listbox.delete(0, tk.END)  # Delete all items from the listbox
+            deleted_zone.append(tuple(wall_list)) # Sends every wall to the deleted zone for restoration.
+            for canvas_id in canvas_ids:  # Loop through all stored canvas IDs
+                canvas.delete(canvas_id)  # Delete each instance from the canvas
+            canvas_ids.clear()  # Clear the list of canvas IDs
+            wall_list.clear()  # Clear the wall list
+            instance_counter = 0
+            commands_list.append(Commands.DELETE_ALL) # Adds a DELETE_ALL to the commands list.
+            
+
+root.bind('<Control-y>', redo_last_command)
 
 def update_listbox():
     instance_listbox.delete(0, tk.END)
@@ -384,6 +438,9 @@ def on_click_and_add_instance(event):
     instance_listbox.insert(tk.END, instance_info)  # Insert the instance information as a new item
     instance_counter += 1
     commands_list.append(Commands.PLACE)
+    undoed_commands.clear()
+    redeleted_zone.clear()
+    canvas.update()
     
 def parse_wall_data(line):
     # Remove leading and trailing whitespaces and remove the trailing semicolon
@@ -469,6 +526,8 @@ def delete_all_instances():
     instance_counter = 0
     global commands_list
     commands_list.append(Commands.DELETE_ALL) # Adds a DELETE_ALL to the commands list.
+    undoed_commands.clear()
+    redeleted_zone.clear()
 
 button_frame = tk.Frame(root)
 button_frame.pack(side="bottom")
@@ -515,6 +574,9 @@ def on_canvas_click(event):
     # Highlight the selected instance
     canvas.itemconfig(rect, outline="red", width=2)  # Highlight with a red outline
     commands_list.append(Commands.PLACE) # Add a place command to the command list.
+    # Clear the undone commands list and wall data.
+    undoed_commands.clear()
+    redeleted_zone.clear()
     canvas.update()
     
 

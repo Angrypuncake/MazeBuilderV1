@@ -24,9 +24,9 @@ insertAndSetFirstWall(&head, 1, 535, 465, 100, 10);
 ### Rotating
 - The block that you are currently holding can be rotated with `r`. This will swap its width and height. Useful for quickly building walls.
 
-### Undo 
-- Ctrl + Z will undo the last action, if it was to delete a block, it will restore the deleted block. If it was to place a block, it will then delete the block.
-- Re-doing (using Ctrl + y) will be added soon.
+### Undo and Redo
+- `Ctrl + z` will undo the last action, if it was to delete a block, it will restore the deleted block. If it was to place a block, it will then delete the block.
+- `Ctrl + y` will redo the last undone action (using `Ctrl + z`). Be careful, because if any action is taken after undoing, you will not be able to redo anymore.
 
 ### Loading
 - If you want to load your own walls to the editor, use the UPLOAD DATA BUTTON. This takes a txt file containing examples like:
