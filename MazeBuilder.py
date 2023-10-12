@@ -420,6 +420,13 @@ def parse_wall_data(line):
         print(f"Invalid line format: {line}")
         return None
 
+# Swaps the width and height of the block being placed, effectively "rotating" it by 90 degrees.
+def rotate_block(event):
+    temp_var = width_var.get()
+    width_var.set(height_var.get())
+    height_var.set(temp_var)
+    
+root.bind("<r>", rotate_block)    
 
 
 def upload_and_generate_walls():
