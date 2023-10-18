@@ -2,9 +2,12 @@ import tkinter as tk
 import math
 from tkinter import filedialog
 from enum import Enum
+import sys
 
 # optional for copy code to clipboard
 #import pyperclip
+
+sys.setrecursionlimit(1500)
 
 wall_list = []
 
